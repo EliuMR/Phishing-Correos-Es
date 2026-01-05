@@ -28,7 +28,7 @@ export const Global = createGlobalStyle`
   }
 
   p, span, small {
-    color: #777777; /* texto secundario */
+    color: #cfcfcf; /* texto secundario */
   }
 
     h1 {

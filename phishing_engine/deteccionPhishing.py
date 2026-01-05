@@ -9,13 +9,19 @@ class deteccionPhishingRF:
 
         modelo_path = os.path.join(
             base_dir,
-            "random_forest_spam_model.joblib"
+            "decision_random_forest_email_model.joblib"
         )
 
 
         self.modelo = joblib.load(modelo_path)
-        self.clases_legitimas = ["enron_ham", "hard_ham"]
-        self.clases_phishing = ["traditional_phishing", "spear_phishing"]
+        self.clases_legitimas = [0]
+        self.clases_phishing = [1]
+    def __texto_valido(self, vector):
+        if len(self.correo.split()) < 5:
+            return False
+        if vector.nnz < 4:
+            return False
+        return True
 
     def __Prediccion(self):
         pred      = self.modelo.predict([self.correo])[0]
@@ -23,6 +29,8 @@ class deteccionPhishingRF:
         clases    = self.modelo.classes_
         prob_pred = probs[np.where(clases == pred)][0]
         vector = self.modelo.named_steps["tfidf"].transform([self.correo])
+        if not self.__texto_valido(vector): #Filtrar estructuras que no den información últil
+             return "desconocido", 0.0, []
         feature_names = np.array(
             self.modelo.named_steps["tfidf"].get_feature_names_out()
         )
@@ -33,6 +41,8 @@ class deteccionPhishingRF:
     
     def ObtencionResultado(self):
         pred, prob_pred, palabras_influyentes = self.__Prediccion()
+        if pred == "desconocido":#correo no tiene información útil
+            return False, 0.0, []
         if pred in self.clases_legitimas:
              resultado = True
              mensaje = f"""

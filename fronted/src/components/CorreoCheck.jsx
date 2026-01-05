@@ -68,7 +68,9 @@ const ResultadoAnalisis = styled.div`
     border: #ff611d 3px solid ;
     ul{
         margin-left: 25px;
+        color: #cfcfcf; /* texto secundario */
     }
+
 `;
 
 const IA = styled.p`
@@ -162,10 +164,10 @@ function CorreoCheck(){
                     <textarea value={correo}
                         required
                         onChange={(e) => setCorreo(e.target.value)}
-                        placeholder="
-                                    Asunto:  ...
-                                    Cuerpo mensaje ...
-                                    Atentamente,..."
+                        placeholder
+="Asunto:  ...
+Cuerpo mensaje ...
+Atentamente,..."
                     ></textarea>
                 </div>
                 <div className="BotonWrapper">
