@@ -15,6 +15,10 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  h3{
+    color: #fff
+  }
 `;
 
 const Nav = styled.nav`
@@ -48,6 +52,7 @@ const Navli = styled.li`
     cursor: pointer;
     transition: 0.25s;
     display: block;
+    color: #fff
   }
 
   .activo {
@@ -72,7 +77,7 @@ const Burger = styled.div`
 
 function Navegacion() {
   const location = useLocation();
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -89,7 +94,7 @@ function Navegacion() {
   };
   return (
     <Header>
-      <h3>DETECCIÓN PHISHING CORREOS</h3>
+      <h3>DETECCIÓN PHISHING EN CORREOS</h3>
 
       <Burger onClick={() => setOpen(!open)}>☰</Burger>
 

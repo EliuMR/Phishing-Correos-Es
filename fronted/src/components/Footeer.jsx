@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-
+import { CONTACTO } from "../constants/urls";
 const Footer_Info = styled.div`
   display: flex;
   justify-content: space-between;
@@ -74,7 +74,7 @@ function Footer(){
                         <div>
                             <ul>
                                 <li>
-                                    <a href="/contacto">
+                                    <a href={CONTACTO}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M12 13.5 1.5 6h21L12 13.5zm0 2.25L1.5 7.5V18h21V7.5L12 15.75z"/>
                                         </svg>

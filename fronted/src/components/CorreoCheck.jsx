@@ -157,17 +157,18 @@ function CorreoCheck(){
     return(  
         <PageTransition>
         <Wrapper>
-            <h4>Copie y pegue su correo en el siguiente recuadro y presione analaizar:</h4>
-
+            <h3>Copie y pegue su correo en el siguiente recuadro y presione analaizar:</h3>
+            <p>Puede colocar el remitente, asunto y cuerpo del mensaje o incluso sólo el cuerpo del mismo. No se almacena el correo después del análisis.</p>
             <FormCheck onSubmit={handleSubmit}>
                                 <div className="TextareaWrapper">
                     <textarea value={correo}
                         required
                         onChange={(e) => setCorreo(e.target.value)}
                         placeholder
-="Asunto:  ...
-Cuerpo mensaje ...
-Atentamente,..."
+="Remitente:  ...
+Asunto: ...
+Cuerpo de mensaje ...
+"
                     ></textarea>
                 </div>
                 <div className="BotonWrapper">
