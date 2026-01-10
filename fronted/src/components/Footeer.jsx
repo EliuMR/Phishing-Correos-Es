@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { CONTACTO } from "../constants/urls";
+
 const Footer_Info = styled.div`
   display: flex;
   justify-content: space-between;
@@ -10,6 +10,9 @@ const Footer_Info = styled.div`
   div ul {
     padding: 0;
     margin: 0;
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
   }
 
   div ul li {
@@ -26,6 +29,7 @@ const Footer_Info = styled.div`
   div ul li a:hover {
     color: #ff6a00;
     transition: all 0.25s ease;
+    transform: scale(1.15);
   }
 
   div p {
@@ -69,14 +73,19 @@ function Footer(){
                     <Footer_Info>
                         <div>
                             <p style={{ fontWeight: 'bold' , color: '#d6d2bd'}}>Eliú MR</p>
-                            <p style={{ fontStyle: 'italic' , color: '#d6d2bd'}}> En proceso constante de mejora. </p>
+                            <p style={{ fontStyle: 'italic' , color: '#d6d2bd'}}>  </p>
                         </div>
                         <div>
                             <ul>
                                 <li>
-                                    <a href={CONTACTO}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 13.5 1.5 6h21L12 13.5zm0 2.25L1.5 7.5V18h21V7.5L12 15.75z"/>
+                                    <a href="/contacto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="currentColor">
+                                        <g id="style=linear">
+                                        <g id="email">
+                                        <path id="vector" d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="currentColor" strokeWidth="1.8" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path id="vector_2" d="M18.7698 7.7688L13.2228 12.0551C12.5025 12.6116 11.4973 12.6116 10.777 12.0551L5.22998 7.7688" stroke="#333" strokeWidth="1.5" strokeLinecap="round"/>
+                                        </g>
+                                        </g>
                                         </svg>
                                     </a>
                                 </li>
@@ -114,7 +123,7 @@ function Footer(){
                         </div>
                     </Footer_Info>
                     <hr/>
-                    <p style={{color: '#ff611d'}}>&copy; 2025 Eliú Moreno Ramírez. Todos los derechos reservados. / All rights reserved.</p>
+                    <p style={{color: '#ff611d'}}>2026 ~emorz~</p>
                 </footer>
             
             </>

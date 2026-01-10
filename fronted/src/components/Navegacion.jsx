@@ -1,84 +1,136 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { HOME_WEB, VER_DETALLE } from "../constants/urls";
+
 
 const Header = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(201, 201, 201, 0.507); 
-  backdrop-filter: blur(6px);
-  margin: 10px 20px;
-  padding: 10px 16px;
-  border-radius: 30px;
+
+  margin: 5px auto;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+
+  background: ${({ scrolled,  }) =>(
+    scrolled ? "rgba(133, 133, 133, 0.507)" : "none")}; 
+  transition: all 0.3s ease;
+  backdrop-filter: blur(2px);
+  border-radius: 15px;
 
   h3{
-    color: #fff
+    padding: 0px 20px ;
   }
+
+  @media (max-width: 900px) {
+    margin: 5px auto;
+  }
+
+  @media (max-width: 768px) {
+    margin: 5px auto;
+  }
+  
 `;
 
 const Nav = styled.nav`
+  /* padding: 8px 15px; */
+  padding: 8px 15px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  
   @media (max-width: 768px) {
     position: absolute;
-    top: 70px;
-    right: 20px;
-    background: rgba(201, 201, 201, 0.507); 
-    border-radius: 20px;
-    padding: 10px;
+    top: 50px;
+    right: 0px;
+    width: 250px;
+    backdrop-filter: blur(2px);
+    background: rgba(133, 133, 133, 0.507);
     display: ${({ open }) => (open ? "block" : "none")};
   }
+
+  a {
+    display: block;
+    padding: 3px 12px;
+  }
+
+  
 `;
 
 const NavUl = styled.ul`
   display: flex;
   gap: 8px;
-
+  
   @media (max-width: 768px) {
     flex-direction: column;
   }
 `;
 
 const Navli = styled.li`
-  list-style: none;
-
-  a, div {
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.25s;
-    display: block;
-    color: #fff
-  }
-
-  .activo {
-    background: #ededed;
-  }
-
-  a:hover, div:hover {
-    background: #fff;
-    color: #ff611d;
-  }
+    color: #F0F0F0;
+    /* padding: 10px; */
+    list-style: none;
+    position: relative; /* contexto para ::before y ::after */
+    display: inline-block; /* asegura que el li tenga ancho ajustable al contenido */
+    margin-right: 5px;
+    font-size: 18px;
+    a.active {
+      color: #2B2B2B;
+      background-color: #EDEDED;
+      border-radius: 20px; 
+      transition:  all 0.3s ease; 
+      margin: 0;
+    }
+    &:hover{
+        color: #ff611d;
+        background-color: #FFFFFF;
+        border-radius: 20px;
+        transition: all 0.3s ease; 
+    }
+     @media (max-width: 1024px) {
+      font-size: 18px;
+    }
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+   
 `;
 
 const Burger = styled.div`
   display: none;
-  font-size: 26px;
+  width: 30px;
+  height: 22px;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 14px 0px;
+  margin-right: 10px;
   cursor: pointer;
+  span {
+    height: 4px;
+    background: #ff611d;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
 
   @media (max-width: 768px) {
-    display: block;
+    display: flex;
   }
 `;
-
 function Navegacion() {
   const location = useLocation();
   const [active, setActive] = useState("");
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 15); // cuando baja 10px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
 
   useEffect(() => {
     if (location.pathname === "/info") setActive("info");
@@ -93,35 +145,23 @@ function Navegacion() {
     window.location.href = VER_DETALLE;
   };
   return (
-    <Header>
-      <h3>DETECCIÓN PHISHING EN CORREOS</h3>
+    <Header scrolled={scrolled ? "true" : undefined}>
+      <h3>Email Phishing Detector</h3>
 
-      <Burger onClick={() => setOpen(!open)}>☰</Burger>
+      <Burger onClick={() => setOpen(!open)}>
+        <span />
+        <span />
+        <span />
+      </Burger>
 
-      <Nav open={open}>
+      <Nav open={open}> 
         <NavUl>
           <Navli>
-            <div
-              className={active === "home" ? "activo" : ""}
-              onClick={() => {
-                goHome();
-                setOpen(false);
-              }}
-            >
-              Home
-            </div>
+            <NavLink  to="/" onClick={() => {setOpen(false); goHome() }}>Inicio</NavLink >
           </Navli>
 
           <Navli>
-            <div
-              className={active === "info" ? "activo" : ""}
-              onClick={() => {
-                goDet();
-                setOpen(false);
-              }}
-            >
-              Ver Detalles
-            </div>
+            <NavLink  to="/" onClick={() => {setOpen(false); goDet() }}>Inicio</NavLink >
           </Navli>
         </NavUl>
       </Nav>

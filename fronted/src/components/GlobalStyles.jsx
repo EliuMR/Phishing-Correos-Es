@@ -13,13 +13,15 @@ export const Global = createGlobalStyle`
 
  #root {
     width: 100%;
-    margin: 0;
+    margin: 0; 
     padding: 0;
   }
 
   body {
     font-family: raleway;
     background-color: #333;
+    height: 100%;
+    line-height: 1.8;
   }
 
   main {
